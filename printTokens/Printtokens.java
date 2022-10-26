@@ -27,7 +27,7 @@ public class Printtokens {
 	/***********************************************/
 	BufferedReader open_character_stream(String fname) {
 		BufferedReader br = null;
-		if (fname.equals("")) { //changed from fname == null to fname.equals("")
+		if (fname.equals("")) { 
 			br = new BufferedReader(new InputStreamReader(System.in));
 		} else {
 			try {
@@ -39,7 +39,7 @@ public class Printtokens {
 			}
 		}
 		
-		return br; //changed from null to br
+		return br; 
 	}
 	
 	/**********************************************/
@@ -83,9 +83,8 @@ public class Printtokens {
 	BufferedReader open_token_stream(String fname)
 	{
 		BufferedReader br;
-	 if(fname==null) //changed from .equls(nul) to ==null
-	    br=open_character_stream(""); //changed from null to ""
-	 else
+	 if(fname==null) 
+	    br=open_character_stream(""); 
 	    br=open_character_stream(fname);
 	 return br;
 	}
@@ -121,9 +120,9 @@ public class Printtokens {
 	   if(res == -1)return null;
 	   sb.append(ch);
 	   if(is_spec_symbol(ch)==true)return sb.toString(); 
-	   if(ch =='"')id=1;    //changed to 1 from 2 /* prepare for string */
-	   if(ch ==59)id=2;    //changed to 2 from 1 /* prepare for comment */   
-	   
+	   if(ch =='"')id=1;    
+	   if(ch ==59)id=2;    
+	  
 	   res = get_char(br);
 	   if (res == -1) {
 		   unget_char(ch,br);
@@ -246,7 +245,7 @@ public class Printtokens {
 	   {
 	    System.out.print("character,\"" + tok.charAt(1) + "\".\n");
 	   }
-	 if(type == str_constant) { //changed - added str and comment
+	 if(type == str_constant) { 
 		 System.out.print("string," + tok + ".\n");
 	 }
 	 if(type == comment) {
@@ -292,7 +291,7 @@ public class Printtokens {
 	/*************************************/
 	static boolean is_char_constant(String str)
 	{
-	  if (str.length() == 2 && str.charAt(0)=='#' && Character.isLetter(str.charAt(1))) //changed from length>2 to length==2
+	  if (str.length() == 2 && str.charAt(0)=='#' && Character.isLetter(str.charAt(1)))
 	     return true;
 	  else  
 	     return false;
@@ -309,9 +308,9 @@ public class Printtokens {
 	  
 	  if ( Character.isDigit(str.charAt(0))) 
 	    {
-	    while ( i < str.length() && str.charAt(i) != '\0' ) //changed to less than instead of <=   /* until meet token end sign */
+	    while ( i < str.length() && str.charAt(i) != '\0' ) 
 	      {
-	       if(Character.isDigit(str.charAt(i)))	//changed to i from i+1
+	       if(Character.isDigit(str.charAt(i)))	
 	         i++;
 	       else
 	         return false;
@@ -332,7 +331,7 @@ public class Printtokens {
 	  int i=1;
 	 
 	  if ( str.charAt(0) =='"')
-	     { while (i < str.length() && str.charAt(i)!='\0')  //changed from charAt(0) to charAt(i) /* until meet the token end sign */
+	     { while (i < str.length() && str.charAt(i)!='\0') 
 	         { if(str.charAt(i)=='"')
 	             return true;        /* meet the second '"'           */
 	           else
@@ -362,10 +361,10 @@ public class Printtokens {
 	            else
 	               return false;
 	           }      /* end WHILE */
-	     return true; //changed to true from false 
+	     return true; 
 	     }
 	  else
-	     return false; //changed to false from true
+	     return false;
 	}
 	
 	/******************************************/
@@ -386,11 +385,11 @@ public class Printtokens {
 	/*************************************************/
 	static void print_spec_symbol(String str)
 	{
-		if(str.equals(",")) { //changed - added this block
+		if(str.equals(",")) { 
 			System.out.print("comma.\n");
 			return;
 		}
-	    if      (str.equals("(")) //changed to ( from {
+	    if      (str.equals("(")) 
 	    {
 	         
 	             System.out.print("lparen.\n");
@@ -424,8 +423,7 @@ public class Printtokens {
 	             System.out.print("bquote.\n");
 	             return;
 	    }
-	    if (str.equals("/")) //changed - added this
-	    {
+	    if (str.equals("/")) 
 	    	System.out.print("slash.\n");
 	    	return;
 	    }
@@ -468,19 +466,19 @@ public class Printtokens {
 	    {
 	        return true;
 	    }
-	    if(c == '\'') return true; // changed - added this
+	    if(c == '\'') return true; 
 	    return false;     /* others return FALSE */
 	}
 	
 	public static void main(String[] args) throws IOException {
 		String fname = null;
 		if (args.length == 0) {	/* if not given filename,take as '""' */
-			//fname = new String(); //changed - commented so that fname remains null then sets to ""
+			
 		} else if (args.length == 1) {
-			fname = args[0]; //changed from 1 to 0
+			fname = args[0]; 
 		} else {
 			System.out.print("Error!,please give the token stream\n");
-			return;//System.exit(0); //changed
+			return;//System.exit(0); 
 		}
 		Printtokens t = new Printtokens();
 		BufferedReader br = t.open_token_stream(fname);	/* open token stream */
@@ -490,6 +488,6 @@ public class Printtokens {
 			tok = t.get_token(br);
 		}
 		
-		return;//System.exit(0); //changed
+		return;//System.exit(0); 
 	}
 }
